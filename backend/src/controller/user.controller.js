@@ -6,7 +6,7 @@ const signup = async (req, res) => {
         const user = await addUser(req.body);
         res.status(StatusCodes.CREATED).json({ data: user });
     } catch (error) {
-        res.status(StatusCodes.BAD_REQUEST).json({error: error});
+        res.status(StatusCodes.BAD_REQUEST).json({error: error.message});
     }
 }
 
