@@ -69,7 +69,7 @@ const validate = (formData: {
         <Header />
         <div className='SP-A1'>
             <div className='SP-B1'>
-                <div>Login</div>
+                <div>SignUp</div>
             </div>
             <form className='SP-B2' onSubmit={handleSubmit}>
                 <div className='SP-C1'>
@@ -90,7 +90,7 @@ const validate = (formData: {
                 <div className='SP-C3'>
                     <button type='submit'>SignUp</button>
                 </div>
-                <div className='SP-C4'>Already have a account? <Link to='login'><span className='SP-D1'>Login</span></Link></div>
+                <div className='SP-C4'>Already have a account? <Link to='/login'><span className='SP-D1'>Login</span></Link></div>
                 <div className='SP-C5'>Google Auth</div>
                 {error && <div className='SP-C6'>{error}</div>}
             </form>

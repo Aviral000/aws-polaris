@@ -4,7 +4,8 @@
   "description": "frontend directory of the e-newspaper",
   "main": "src/index.tsx",
   "scripts": {
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
   },
   "keywords": [
     "frontend",

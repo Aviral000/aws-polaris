@@ -5,7 +5,8 @@ module.exports = {
     entry: "./src/index.jsx",
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -46,6 +47,8 @@ module.exports = {
             directory: path.resolve(__dirname, 'dist'),
         },
         compress: true,
-        port: 8081
+        port: 8081,
+        historyApiFallback: true,
+        hot: true 
     }
 }
