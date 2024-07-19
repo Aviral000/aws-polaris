@@ -13,10 +13,19 @@ export default function SignUp() {
             </div>
             <form className='SP-B2'>
                 <div className='SP-C1'>
+                    <input type="text" placeholder='First Name' />
+                </div>
+                <div className='SP-C1'>
+                    <input type="text" placeholder='Last Name' />
+                </div>
+                <div className='SP-C1'>
                     <input type="text" placeholder='Email' />
                 </div>
-                <div className='SP-C2'>
+                <div className='SP-C1'>
                     <input type="text" placeholder='Password' />
+                </div>
+                <div className='SP-C1'>
+                    <input type="text" placeholder='Confirm Password' />
                 </div>
                 <div className='SP-C3'>
                     <button type='submit'>SignUp</button>
