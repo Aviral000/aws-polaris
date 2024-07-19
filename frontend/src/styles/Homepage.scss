@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+$base_color: rgba(255, 255, 255, 1);
+$text_color: rgba(0, 0, 0, 1);
+
+$font_weight: 100;
+
+@mixin playFair {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+body {
+    @include playFair();
+}
+
+.HP-A1 {
+    display: flex;
+    padding: 2rem;
+
+    .HP-B1 {
+
+        .HP-C1 {
+            font-size: 4rem;
+            font-weight: $font_weight+500;
+        }
+
+        .HP-C2 {
+            font-size: 1rem;
+            font-weight: $font_weight+100;
+            word-spacing: 1rem;
+            letter-spacing: 3px;
+            padding-top: 1rem;
+        }
+
+        .HP-C3 {
+            padding-top: 3rem;
+
+            button {
+                width: 70%;
+                height: 3.5rem;
+                border-radius: 5px;
+                background-color: black;
+                color: white;
+                font-size: 1.2rem;
+            }
+
+            button:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .HP-B2 {
+        padding-left: 5rem;
+
+        .HP-C1 {
+            width: 40rem;
+            height: auto;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .HP-C2 {
+            text-align: center;
+            padding-left: 4rem;
+            padding-right: 4rem;
+            font-weight: $font_weight+500;
+        }
+
+        .HP-C3 {
+            padding-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            
+            button {
+                width: 20%;
+                height: 2.5rem;
+                border-radius: .6rem;
+                font-weight: $font_weight+500;
+                border: 0px;
+                transition: width .3s ease;
+            }
+
+            button:hover {
+                cursor: pointer;
+                width: 22%;
+            }
+
+            .HP-D1 {
+                background-color: #F64914;
+                color: #FBCBB8;
+            }
+
+            .HP-D2 {
+                background-color: #2C85FE;
+                color: #A9C5F3;
+            }
+
+            .HP-D3 {
+                background-color: #1AD89A;
+                color: #CDF6E1;
+            }
+        }
+    }
+}
