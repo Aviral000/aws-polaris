@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const addUser = async (data) => {
     try {
-        const { password } = data;
+        const { firstName, email, password } = data;
         const salt = await bcrypt.genSalt(10);
         const cryptedPassword = await bcrypt.hash(password, salt);
         const user = await User.create({ ...data, password: cryptedPassword });
@@ -14,4 +14,13 @@ const addUser = async (data) => {
     }
 }
 
-module.exports = { addUser }
+const findUserById = async (data) => {
+    try {
+        const user = await User.findById(data.id);
+        return user;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+module.exports = { addUser, findUserById }
