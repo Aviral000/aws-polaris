@@ -5,7 +5,8 @@ const userSignupBody = Joi.object({
     firstName: Joi.string().required(),
     lastName: Joi.string(),
     email: Joi.string().required().email(),
-    password: Joi.string().required()
+    password: Joi.string().required(),
+    confirmPassword: Joi.string()
 })
 
 const userLoginBody = Joi.object({

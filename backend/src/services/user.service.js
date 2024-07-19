@@ -6,10 +6,14 @@ const bcrypt = require('bcrypt');
 
 const addUser = async (data) => {
     try {
-        const { firstName, email, password } = data;
+        const { firstName, email, password, confirmPassword } = data;
 
         if(!firstName || !email || !password) {
             throw new Error("Fill out the details properly");
+        }
+
+        if(password !== confirmPassword) {
+            throw new Error("Please check your passport and confirm passpord again");
         }
 
         if(await findUserByEmail()) {
