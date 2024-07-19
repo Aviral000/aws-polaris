@@ -15,4 +15,8 @@ const Server = {
     port: process.env.PORT_NUMBER
 };
 
-module.exports = { MongoDB, Server }
+const Token_Key = {
+    Private_key: process.env.SECRET_KEY
+}
+
+module.exports = { MongoDB, Server, Token_Key }
