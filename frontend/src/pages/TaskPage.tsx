@@ -95,6 +95,22 @@ export default function TaskPage() {
     navigate('/login');
   };
 
+  const updateTaskStatus = async (taskId: string, newStatus: 'todo' | 'in-progress' | 'done') => {
+    try {
+      await axios.put(`http://127.0.0.1:8082/u1/api/tasks/update/${taskId}`, 
+        { status: newStatus },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      setTasks(tasks.map(task => task._id === taskId ? { ...task, status: newStatus } : task));
+    } catch (error) {
+      handleApiError(error);
+    }
+  };
+
   const renderTasksByStatus = (status: 'todo' | 'in-progress' | 'done') => {
     return filteredTasks
       .filter(task => task.status === status)
@@ -107,6 +123,8 @@ export default function TaskPage() {
             <button style={{ backgroundColor: 'blue' }} onClick={() => navigate(`/view-task/${task._id}`)}>View</button>
             <button onClick={() => navigate(`/edit-task/${task._id}`)}>Edit</button>
             <button style={{ backgroundColor: 'red' }} onClick={() => handleDelete(task._id)}>Delete</button>
+            {task.status === 'todo' && <button onClick={() => updateTaskStatus(task._id, 'in-progress')}>Start</button>}
+            {task.status === 'in-progress' && <button onClick={() => updateTaskStatus(task._id, 'done')}>Done</button>}
           </div>
         </div>
       ));

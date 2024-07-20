@@ -91,7 +91,6 @@ export default function Header() {
         { windowSize.width > 750 ? (
           !loggedIn ? (
             <div className='B2'>
-              <Link to='/about'>About</Link>
               <Link to='/login'>Login</Link>
               <Link to='/signup'>SignUp</Link>
             </div>
@@ -112,7 +111,6 @@ export default function Header() {
             </button>
             {menuOpen && (
               <div ref={menuRef} className='dropdown-menu'>
-                <Link to='/about'>About</Link>
                 {!loggedIn ? (
                   <>
                     <Link to='/login'>Login</Link>
