@@ -25,6 +25,7 @@ export default function Login() {
         try {
             const response = await axios.post('http://127.0.0.1:8082/u1/api/users/login', formData);
             localStorage.setItem('token', response.data.token);
+            localStorage.setItem('loggedIn', response.data.loggedIn);
             navigate('/task');
         } catch (err) {
             console.error('Error:', err);

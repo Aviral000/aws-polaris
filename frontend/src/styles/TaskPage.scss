@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+$base_color: rgba(255, 255, 255, 1);
+$base_color2: rgb(96, 96, 253);
+$text_color: rgba(0, 0, 0, 1);
+
+$font_weight: 100;
+
+@mixin playFair {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+@mixin roboto {
+    .roboto-regular {
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+}
+
+body {
+    @include roboto();
+}
+
+.TK-A1 {
+    padding: 2rem;
+
+    .TK-B1 {
+
+        .TK-C1 {
+            width: 10rem;
+            height: 3rem;
+
+            button {
+                width: 100%;
+                height: 80%;
+                background-color: $base_color2;
+                border: 0;
+                color: $base_color;
+                font-size: 1rem;
+                border-radius: 5px;
+            }
+
+            button:hover {
+                cursor: pointer;
+            }
+        }
+
+        .TK-C2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            flex-wrap: nowrap;
+
+            .TK-D1 {
+                width: 30rem;
+                height: 3rem;
+                text-wrap: nowrap;
+
+                label {
+                    font-weight: 600;
+                    padding-right: .5rem;
+                }
+
+                input {
+                    width: 100%;
+                    height: 60%;
+                    border-radius: 10px;
+                }
+            }
+
+            .TK-D2 {
+                height: 3rem;
+                text-wrap: nowrap;
+
+                label {
+                    font-weight: 600;
+                    padding-right: .5rem;
+                }
+
+                select {
+                    width: auto;
+                    height: 60%;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+}

@@ -12,10 +12,13 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const user = await loggedUser(req.body);
-        res.status(StatusCodes.CREATED).json(user);
+        const { data: user, token } = await loggedUser(req.body);
+
+        res.cookie('token', token, { maxAge: 3600000 });
+
+        res.status(StatusCodes.OK).json({ data: user, token, loggedIn: true });
     } catch (error) {
-        res.status(StatusCodes.BAD_REQUEST).json({error: error.message});
+        res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
     }
 }
 

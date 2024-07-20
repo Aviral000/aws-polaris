@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
-import '../styles/Header.scss'
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/Header.scss';
 
 import { RxDropdownMenu } from "react-icons/rx";
 import { MdHorizontalRule } from "react-icons/md";
@@ -21,6 +21,8 @@ export default function Header() {
   });
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const loggedIn = localStorage.getItem('loggedIn');
+  const navigate = useNavigate();
 
   useEffect(() => {
     function handleResize() {
@@ -69,6 +71,13 @@ export default function Header() {
 
   let isLargeScreen = windowSize.width > 750;
 
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    localStorage.removeItem('loggedIn');
+    navigate('/login');
+  };
+
   return (
     <header className='header'>
       <div className={isLargeScreen && !menuOpen ? 'A1' : 'A2'}>
@@ -80,11 +89,18 @@ export default function Header() {
             </div>
         </div>
         { windowSize.width > 750 ? (
-          <div className='B2'>
-            <Link to='/about'>About</Link>
-            <Link to='/login'>Login</Link>
-            <Link to='/signup'>SignUp</Link>
-          </div>
+          !loggedIn ? (
+            <div className='B2'>
+              <Link to='/about'>About</Link>
+              <Link to='/login'>Login</Link>
+              <Link to='/signup'>SignUp</Link>
+            </div>
+          ) : (
+            <div className='B2'>
+              <Link to='/task'>Tasks</Link>
+              <Link to='/login'><button style={{ color: "red" }} onClick={handleLogout}>Logout</button></Link>
+            </div>
+          )
         ) : (
           <div className='B3'>
             <button className='C1' type='button' onClick={toggleMenu}>
@@ -92,14 +108,22 @@ export default function Header() {
                 <RxDropdownMenu style={{ color: 'black' }} />
               ) : (
                 <MdHorizontalRule style={{ color: 'black' }} />
-              )
-            }
+              )}
             </button>
             {menuOpen && (
               <div ref={menuRef} className='dropdown-menu'>
                 <Link to='/about'>About</Link>
-                <Link to='/login'>Login</Link>
-                <Link to='/signup'>SignUp</Link>
+                {!loggedIn ? (
+                  <>
+                    <Link to='/login'>Login</Link>
+                    <Link to='/signup'>SignUp</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to='/task'>Tasks</Link>
+                    <Link to='/login'><button onClick={handleLogout}>Logout</button></Link>
+                  </>
+                )}
               </div>
             )}
           </div>

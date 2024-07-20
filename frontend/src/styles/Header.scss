@@ -46,6 +46,18 @@ body {
     .B2 {
         display: flex;
         gap: 2rem;
+
+        button {
+            @include playFair();
+            padding: 0;
+            border: 0;
+            background-color: white;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
     }
     .B3 {
         .C1 {

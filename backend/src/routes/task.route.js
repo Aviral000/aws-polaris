@@ -1,9 +1,14 @@
 const router = require('express').Router();
 const passport = require('passport');
-const { taskMaker } = require('../controller/task.controller');
+const { findAllTask, taskMaker, taskUpdator, taskDeletion } = require('../controller/task.controller');
+
+const { taskAddValidBody } = require("../validations/task.validation");
 
 const authenticate = passport.authenticate('jwt', { session: false });
 
-router.post('/add', authenticate, taskMaker);
+router.get('/view', authenticate, findAllTask);
+router.post('/add', authenticate, taskAddValidBody, taskMaker);
+router.put('/update/:id', authenticate, taskAddValidBody, taskUpdator);
+router.delete('/delete/:id', authenticate, taskDeletion);
 
 module.exports = router
