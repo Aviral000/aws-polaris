@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import axios from 'axios';
 import '../styles/TaskPage.scss';
+import debounce from 'lodash.debounce';
 
 interface Task {
   _id: string;
@@ -19,7 +20,10 @@ export default function TaskPage() {
   const token = localStorage.getItem('token');
   const [error, setError] = useState<string | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
-  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('recent');
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
+
   useEffect(() => {
     if (loggedIn && token) {
       fetchTasks();
@@ -27,6 +31,10 @@ export default function TaskPage() {
       navigate('/login');
     }
   }, [loggedIn, token, navigate]);
+
+  useEffect(() => {
+    filterAndSortTasks();
+  }, [searchTerm, sortBy, tasks]);
 
   const fetchTasks = async () => {
     try {
@@ -39,6 +47,33 @@ export default function TaskPage() {
     } catch (error) {
       handleApiError(error);
     }
+  };
+
+  const debounceSearch = useCallback(
+    debounce((term: string) => {
+      setSearchTerm(term);
+    }, 300),
+    []
+  );
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debounceSearch(event.target.value);
+  };
+
+  const filterAndSortTasks = () => {
+    let result = tasks.filter(task =>
+      task.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (sortBy === 'recent') {
+      result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } else if (sortBy === 'last') {
+      result.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    } else if (sortBy === 'title') {
+      result.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    setFilteredTasks(result);
   };
 
   const handleApiError = (error: unknown) => {
@@ -60,10 +95,8 @@ export default function TaskPage() {
     navigate('/login');
   };
 
-  console.log(tasks);
-
   const renderTasksByStatus = (status: 'todo' | 'in-progress' | 'done') => {
-    return tasks
+    return filteredTasks
       .filter(task => task.status === status)
       .map(task => (
         <div key={task._id} className='task-item'>
@@ -71,7 +104,7 @@ export default function TaskPage() {
           <p>{task.description}</p>
           <p>Created At: {new Date(task.createdAt).toLocaleString()}</p>
           <div className='task-actions'>
-            <button style={{ backgroundColor: 'blue' }}>View</button>
+            <button style={{ backgroundColor: 'blue' }} onClick={() => navigate(`/view-task/${task._id}`)}>View</button>
             <button onClick={() => navigate(`/edit-task/${task._id}`)}>Edit</button>
             <button style={{ backgroundColor: 'red' }} onClick={() => handleDelete(task._id)}>Delete</button>
           </div>
@@ -104,11 +137,11 @@ export default function TaskPage() {
             <div className='TK-C2'>
               <div className='TK-D1'>
                 <label htmlFor="search">Search: </label>
-                <input type="text" placeholder='Search...' />
+                <input type="text" placeholder='Search title...' onChange={handleSearchChange} />
               </div>
               <div className='TK-D2'>
                 <label htmlFor="sortby">Sort By:</label>
-                <select id="sortby">
+                <select id="sortby" value={sortBy} onChange={e => setSortBy(e.target.value)}>
                   <option value="recent">Recent</option>
                   <option value="last">Last</option>
                   <option value="title">Title</option>

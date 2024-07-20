@@ -19,16 +19,24 @@ const taskStatusQuery = async (userID, query) => {
     }
 }
 
+const taskFromId = async (userID, paramsId) => {
+    try {
+        const tasks = await Task.findOne({ userId: userID, _id: paramsId });
+        return tasks;
+    } catch (error) {
+        throw new Error("Task retrieval failed", error);
+    }
+}
+
 const addTask = async (data, userId) => {
     try {
         const lastTask = await Task.findOne({ userId }).sort({ taskNumber: -1 }).exec();
         const taskNumber = lastTask ? lastTask.taskNumber + 1 : 1;
 
-        const task = await Task.create({ userId, taskNumber, description: data.description, title: data.title || "" });
+        const task = await Task.create({ userId, taskNumber, description: data.description, title: data.title || "", status: data.status });
 
         return task;
     } catch (error) {
-        console.log(error);
         throw new Error("Task creation failed");
     }
 }
@@ -64,4 +72,4 @@ const deleteTask = async (userId, taskId) => {
     }
 };
 
-module.exports = { getTaskById, addTask, updateTask, deleteTask, taskStatusQuery };
+module.exports = { getTaskById, addTask, updateTask, deleteTask, taskStatusQuery, taskFromId };

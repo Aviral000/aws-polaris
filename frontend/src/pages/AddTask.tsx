@@ -23,7 +23,7 @@ export default function AddTask() {
           Authorization: `Bearer ${token}`
         }
       });
-      navigate('/tasks');
+      navigate('/task');
     } catch (error) {
       setError('Failed to add task. Please try again.');
     }

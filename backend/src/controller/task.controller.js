@@ -1,4 +1,4 @@
-const { getTaskById, addTask, updateTask, deleteTask, taskStatusQuery } = require('../services/task.service');
+const { getTaskById, addTask, updateTask, deleteTask, taskStatusQuery, taskFromId } = require('../services/task.service');
 const { StatusCodes } = require('http-status-codes');
 
 const findAllTask = async (req, res) => {
@@ -13,6 +13,15 @@ const findAllTask = async (req, res) => {
 const findTaskByStatus = async (req, res) => {
     try {
         const task = await taskStatusQuery(req.user._id, req.query);
+        res.status(StatusCodes.OK).json(task);
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).json(error.message);
+    }
+}
+
+const getTaskByIdAndUserId = async (req, res) => {
+    try {
+        const task = await taskFromId(req.user._id, req.params.id);
         res.status(StatusCodes.OK).json(task);
     } catch (error) {
         res.status(StatusCodes.BAD_REQUEST).json(error.message);
@@ -46,4 +55,4 @@ const taskDeletion = async (req, res) => {
     }
 }
 
-module.exports = { findAllTask, taskMaker, taskUpdator, taskDeletion, findTaskByStatus };
+module.exports = { findAllTask, taskMaker, taskUpdator, taskDeletion, findTaskByStatus, getTaskByIdAndUserId };

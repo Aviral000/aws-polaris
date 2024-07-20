@@ -4,10 +4,7 @@ const MongoDB = {
     url: process.env.MONGO_URL,
     options: {
         useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverSelectionTimeoutMS: 5000,
-        socketTimeoutMS: 45000,
-        family: 4,
+        useUnifiedTopology: true
     }
 }
 

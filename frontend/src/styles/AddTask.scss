@@ -77,3 +77,9 @@ body {
     }
   }
 }
+
+@media screen and (max-width: 550px) {
+  .add-task-container {
+    align-items: normal;
+  }
+}

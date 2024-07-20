@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import About from './pages/About'
 import TaskPage from './pages/TaskPage'
 import AddTask from './pages/AddTask'
+import ViewTaskModal from './components/ViewTaskModel'
+import EditTaskModal from './components/EditTaskModel'
 
 export default function App() {
 
@@ -20,6 +22,8 @@ export default function App() {
           <Route path='/about' Component={About} />
           <Route path='/task' Component={TaskPage} />
           <Route path='/add-task' Component={AddTask} />
+          <Route path='/view-task/:id' Component={ViewTaskModal} />
+          <Route path='/edit-task/:id' Component={EditTaskModal} />
         </Routes>
       </Router>
     </div>
