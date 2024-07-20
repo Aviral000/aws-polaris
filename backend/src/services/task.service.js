@@ -9,6 +9,16 @@ const getTaskById = async (userID) => {
     }
 }
 
+const taskStatusQuery = async (userID, query) => {
+    try {
+        const tasks = await Task.find({ userId: userID });
+        const filteredTasks = tasks.filter(task => task.status === query.status);
+        return filteredTasks;
+    } catch (error) {
+        throw new Error("Task retrieval failed", error);
+    }
+}
+
 const addTask = async (data, userId) => {
     try {
         const lastTask = await Task.findOne({ userId }).sort({ taskNumber: -1 }).exec();
@@ -33,6 +43,7 @@ const updateTask = async (data, userId, taskId) => {
 
         if (data.title) task.title = data.title;
         if (data.description) task.description = data.description;
+        if (data.status) task.status = data.status;
 
         await task.save();
         return task;
@@ -53,4 +64,4 @@ const deleteTask = async (userId, taskId) => {
     }
 };
 
-module.exports = { getTaskById, addTask, updateTask, deleteTask };
+module.exports = { getTaskById, addTask, updateTask, deleteTask, taskStatusQuery };

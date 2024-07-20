@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import About from './pages/About'
 import TaskPage from './pages/TaskPage'
+import AddTask from './pages/AddTask'
 
 export default function App() {
 
@@ -18,6 +19,7 @@ export default function App() {
           <Route path='/login' Component={Login} />
           <Route path='/about' Component={About} />
           <Route path='/task' Component={TaskPage} />
+          <Route path='/add-task' Component={AddTask} />
         </Routes>
       </Router>
     </div>

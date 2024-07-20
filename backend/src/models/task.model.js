@@ -16,6 +16,10 @@ const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         default: ""
+    },
+    status: {
+        type: String,
+        default: "todo"
     }
 }, {
     timestamps: true
