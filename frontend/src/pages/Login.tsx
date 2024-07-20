@@ -13,28 +13,28 @@ export default function Login() {
   const [error, setError] = useState("");
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-  
-      const formData = {
-          email: email,
-          password: password
-      };
-  
-      try {
-          const response = await axios.post('http://127.0.0.1:8082/u1/api/login', formData);
-          navigate('/login');
+        e.preventDefault();
+    
+        const formData = {
+            email: email,
+            password: password
+        };
+
+        validate(formData);
+    
+        try {
+            const response = await axios.post('http://127.0.0.1:8082/u1/api/users/login', formData);
+            localStorage.setItem('token', response.data.token);
+            navigate('/task');
         } catch (err) {
-          console.error('Error:', err);
-          setError("Invalid Credentials");
+            console.error('Error:', err);
+            setError("Invalid Credentials");
         }
   };
   
   const validate = (formData: {
-      firstName: string;
-      lastName: string;
       email: string;
       password: string;
-      confirmPassword: string;
   }): boolean => {
       if (!formData.email) {
           setError("Email is required");
@@ -64,9 +64,9 @@ export default function Login() {
                     <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className='SP-C3'>
-                    <button type='submit'>SignUp</button>
+                    <button type='submit'>Login</button>
                 </div>
-                <div className='SP-C4'>Already have a account? <Link to='/signup'><span className='SP-D1'>SignUp</span></Link></div>
+                <div className='SP-C4'>Don't have the account? <Link to='/signup'><span className='SP-D1'>SignUp</span></Link></div>
                 <div className='SP-C5'>Google Auth</div>
                 {error && <div className='SP-C6'>{error}</div>}
             </form>

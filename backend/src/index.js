@@ -7,6 +7,7 @@ const path = require('path');
 
 const { MongoDB, Server } = require('./config/config');
 const userRouter = require('./routes/user.route');
+const taskRouter = require('./routes/task.route');
 
 const app = express();
 
@@ -24,7 +25,8 @@ mongoose.connect(MongoDB.url, MongoDB.options)
         console.log("DB discontinued", err);
     })
 
-app.use('/u1/api', userRouter);
+app.use('/u1/api/users', userRouter);
+app.use('/u1/api/tasks', taskRouter);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../frontend/dist', 'index.html'));

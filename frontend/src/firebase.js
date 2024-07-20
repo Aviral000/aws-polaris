@@ -7,7 +7,7 @@ import { getAnalytics } from "firebase/analytics";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: import.meta.env.FIREBASE_API_KEY,
   authDomain: "task-reminder-5da7a.firebaseapp.com",
   projectId: "task-reminder-5da7a",
   storageBucket: "task-reminder-5da7a.appspot.com",

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import '../styles/Header.scss'
 
 import { RxDropdownMenu } from "react-icons/rx";
 import { MdHorizontalRule } from "react-icons/md";
-import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,7 +75,7 @@ export default function Header() {
         <div className='B1'>
             <img src='https://webstockreview.net/images/newspaper-clipart-newspaper-reader-7.png' alt='logo' />
             <div style={{ fontSize: "1.5rem" }}>
-              <div>Polaris</div>
+              <Link to='/'>Polaris</Link>
               <div style={{ fontSize: ".5rem" }}>THE TASK REMINDER</div>
             </div>
         </div>
