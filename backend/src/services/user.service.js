@@ -57,6 +57,32 @@ const loggedUser = async (data) => {
     }
 }
 
+const updateExistingUser = async (userID, data) => {
+    try {
+        const user = await User.findOne({ _id: userID });
+
+        if (!user) {
+            throw new Error("Some Error from the server, try to re-login again");
+        }
+
+        if (data.firstName) user.firstName = data.firstName;
+        if (data.lastName) user.lastName = data.lastName;
+        if (data.email) user.email = data.email;
+        if (data.password) {
+            const salt = await bcrypt.genSalt(10);
+            const cryptedPassword = await bcrypt.hash(data.password, salt);
+            data.password = cryptedPassword;
+            await user.save();
+            return user;
+        } else {
+            await user.save();
+            return user;
+        }
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
 const findUserByEmail = async (data) => {
     try {
         const user = await User.findOne({ email: data.email });
@@ -88,4 +114,13 @@ const genToken = async (id) => {
     }
 }
 
-module.exports = { addUser, findUserById, loggedUser }
+const getUserByExistingId = async (userID) => {
+    try {
+        const user = await User.findById(userID);
+        return user;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+module.exports = { addUser, findUserById, loggedUser, updateExistingUser, getUserByExistingId }

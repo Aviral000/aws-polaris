@@ -97,16 +97,16 @@ a:hover {
     .header {
         .A1 {
             @include playFair();
-            padding-left: 0rem;
-            padding-right: 0rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
         .A2 {
             @include playFair();
             display: flex;
             justify-content: space-between;
-            padding: 0rem;
+            padding: 1rem;
             padding-left: 2rem;
-            padding-right: 0rem;
+            padding-right: 1rem;
             font-size: 1.5rem;
         }
     }

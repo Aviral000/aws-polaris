@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes')
-const { addUser, loggedUser } = require('../services/user.service');
+const { addUser, loggedUser, updateExistingUser, getUserByExistingId } = require('../services/user.service');
 
 const signup = async (req, res) => {
     try {
@@ -22,4 +22,22 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = { signup, login };
+const updateUser = async (req, res) => {
+    try {
+        const updatedUser = await updateExistingUser(req.user._id, req.body);
+        res.status(StatusCodes.OK).json(updatedUser);
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
+    }
+}
+
+const getLoggedUser = async (req, res) => {
+    try {
+        const user = await getUserByExistingId(req.user._id);
+        res.status(StatusCodes.OK).json(user);
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
+    }
+}
+
+module.exports = { signup, login, updateUser, getLoggedUser };

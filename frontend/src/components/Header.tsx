@@ -6,12 +6,21 @@ import '../styles/Header.scss';
 
 import { RxDropdownMenu } from "react-icons/rx";
 import { MdHorizontalRule } from "react-icons/md";
+import { FaUser } from 'react-icons/fa';
+import axios from 'axios';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface WindowSize {
   width: number;
   height: number;
+}
+
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 export default function Header() {
@@ -23,6 +32,9 @@ export default function Header() {
   const menuRef = useRef<HTMLDivElement>(null);
   const loggedIn = localStorage.getItem('loggedIn');
   const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     function handleResize() {
@@ -31,11 +43,26 @@ export default function Header() {
         height: window.innerHeight,
       });
     }
-    
+
     window.addEventListener("resize", handleResize);
-    
+    fetchUser();
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8082/u1/api/users', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      setError('Failed to fetch user data');
+    }
+  };
+  console.log(user?.firstName);
 
   useEffect(() => {
     const handleOutsideClicks = (event: MouseEvent) => {
@@ -82,13 +109,13 @@ export default function Header() {
     <header className='header'>
       <div className={isLargeScreen && !menuOpen ? 'A1' : 'A2'}>
         <div className='B1'>
-            <img src='https://webstockreview.net/images/newspaper-clipart-newspaper-reader-7.png' alt='logo' />
-            <div style={{ fontSize: "1.5rem" }}>
-              <Link to='/'>Polaris</Link>
-              <div style={{ fontSize: ".5rem" }}>THE TASK REMINDER</div>
-            </div>
+          <img src='https://webstockreview.net/images/newspaper-clipart-newspaper-reader-7.png' alt='logo' />
+          <div style={{ fontSize: "1.5rem" }}>
+            <Link to='/'>Polaris</Link>
+            <div style={{ fontSize: ".5rem" }}>THE TASK REMINDER</div>
+          </div>
         </div>
-        { windowSize.width > 750 ? (
+        {windowSize.width > 750 ? (
           !loggedIn ? (
             <div className='B2'>
               <Link to='/login'>Login</Link>
@@ -96,6 +123,9 @@ export default function Header() {
             </div>
           ) : (
             <div className='B2'>
+              <Link to='/user-profile'>
+                <FaUser /> {user?.firstName}
+              </Link>
               <Link to='/task'>Tasks</Link>
               <Link to='/login'><button style={{ color: "red" }} onClick={handleLogout}>Logout</button></Link>
             </div>
@@ -118,6 +148,9 @@ export default function Header() {
                   </>
                 ) : (
                   <>
+                    <Link to='/user-profile'>
+                      <FaUser /> {user?.firstName}
+                    </Link>
                     <Link to='/task'>Tasks</Link>
                     <Link to='/login'><button onClick={handleLogout}>Logout</button></Link>
                   </>
@@ -128,5 +161,5 @@ export default function Header() {
         )}
       </div>
     </header>
-  )
+  );
 }
