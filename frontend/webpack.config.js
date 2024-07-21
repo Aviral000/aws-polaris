@@ -21,10 +21,6 @@ module.exports = {
                 use: 'babel-loader'
             },
             {
-                test: /\.pug$/,
-                use: ['pug-loader']
-            },
-            {
                 test: /\.s[ac]ss$/i,
                 use: [
                     'style-loader',
@@ -39,7 +35,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.pug'
+            template: './public/index.html'
         })
     ],
     devServer: {
