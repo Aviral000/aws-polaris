@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
+    "vercel-build": "npm run build",
     "test": "jest --watchAll"
   },
   "keywords": [
