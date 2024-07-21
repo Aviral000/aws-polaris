@@ -1,7 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-require('dotenv').config();
-
 
 module.exports = {
     entry: "./src/index.jsx",
@@ -42,11 +40,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.pug'
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY)
-            }
         })
     ],
     devServer: {
