@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import axios from 'axios';
 import '../styles/TaskPage.scss';
 import debounce from 'lodash.debounce';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 interface Task {
   _id: string;
