@@ -6,8 +6,9 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: import.meta.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyCNPQTvSupeCuHXaPfhYQhhP0pw2U3elCQ",
   authDomain: "task-reminder-5da7a.firebaseapp.com",
   projectId: "task-reminder-5da7a",
   storageBucket: "task-reminder-5da7a.appspot.com",
@@ -17,5 +18,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export default app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+export default app;

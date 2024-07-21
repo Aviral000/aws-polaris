@@ -7,23 +7,21 @@ const UserSchema = new mongoose.Schema({
         required: [true, 'first name is required']
     },
     lastName: {
-        type: String
+        type: String,
+        default: ""
     },
     email: {
         type: String,
         required: [true, 'Email is required'],
         validate: {
-        validator: validator.isEmail,
-        message: "Email is invalid"
+            validator: validator.isEmail,
+            message: "Email is invalid"
         },
         unique: [true, 'this email is already taken']
     },
     password: {
         type: String,
-        required: [true, 'Password is required'],
-        validate: {
-        validator: validator.isStrongPassword,
-        }
+        default: ""
     }
 }, {
     timestamps: true

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../styles/SignUp.scss'
+import OAuth from '../components/OAuth';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ export default function Login() {
                     <button type='submit'>Login</button>
                 </div>
                 <div className='SP-C4'>Don't have the account? <Link to='/signup'><span className='SP-D1'>SignUp</span></Link></div>
-                <div className='SP-C5'>Google Auth</div>
+                <div className='SP-C5'><OAuth /></div>
                 {error && <div className='SP-C6'>{error}</div>}
             </form>
         </div>

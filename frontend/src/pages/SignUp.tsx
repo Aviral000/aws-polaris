@@ -3,6 +3,7 @@ import axios from 'axios'
 import Header from '../components/Header'
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/SignUp.scss'
+import OAuth from '../components/OAuth'
 
 export default function SignUp() {
 const navigate = useNavigate();
@@ -93,7 +94,7 @@ const validate = (formData: {
                     <button type='submit'>SignUp</button>
                 </div>
                 <div className='SP-C4'>Already have a account? <Link to='/login'><span className='SP-D1'>Login</span></Link></div>
-                <div className='SP-C5'>Google Auth</div>
+                <div className='SP-C5'><OAuth /></div>
                 {error && <div className='SP-C6'>{error}</div>}
             </form>
         </div>

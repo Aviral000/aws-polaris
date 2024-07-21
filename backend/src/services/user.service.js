@@ -16,7 +16,7 @@ const addUser = async (data) => {
             throw new Error("Please check your passport and confirm passpord again");
         }
 
-        if(await findUserByEmail()) {
+        if(await findUserByEmail(email)) {
             throw new Error("Email is already taken");
         }
 
@@ -24,6 +24,34 @@ const addUser = async (data) => {
         const cryptedPassword = await bcrypt.hash(password, salt);
         const user = await User.create({ ...data, password: cryptedPassword });
         return user;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+const googleAddUser = async (data) => {
+    try {
+        const { fullName, email } = data;
+
+        if(!fullName || !email) {
+            throw new Error("Fill out the details properly");
+        }
+
+        const exisitngUser  = await User.findOne({ email: email });
+
+        if(exisitngUser) {
+            const token = await genToken(exisitngUser._id);
+            return {exisitngUser, token};
+        }
+
+        const name = fullName.split(" ");
+        const firstName = name[0];
+        const lastName = name[1] ? name[1] : "" ;
+
+        const user = await User.create({ firstName: firstName, lastName: lastName, email: email });
+
+        const token = await genToken(user._id);
+        return {user, token};
     } catch (error) {
         throw new Error(error);
     }
@@ -71,13 +99,10 @@ const updateExistingUser = async (userID, data) => {
         if (data.password) {
             const salt = await bcrypt.genSalt(10);
             const cryptedPassword = await bcrypt.hash(data.password, salt);
-            data.password = cryptedPassword;
-            await user.save();
-            return user;
-        } else {
-            await user.save();
-            return user;
+            user.password = cryptedPassword;
         }
+        await user.save();
+        return user;
     } catch (error) {
         throw new Error(error);
     }
@@ -88,7 +113,7 @@ const findUserByEmail = async (data) => {
         const user = await User.findOne({ email: data.email });
         return user;
     } catch (error) {
-        return null;
+        throw new Error(error);
     }
 }
 
@@ -123,4 +148,4 @@ const getUserByExistingId = async (userID) => {
     }
 }
 
-module.exports = { addUser, findUserById, loggedUser, updateExistingUser, getUserByExistingId }
+module.exports = { addUser, findUserById, loggedUser, updateExistingUser, getUserByExistingId, googleAddUser }

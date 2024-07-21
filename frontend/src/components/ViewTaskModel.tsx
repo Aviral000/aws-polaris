@@ -33,7 +33,7 @@ export default function ViewTaskModal() {
       });
       setTask(response.data);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   }
 

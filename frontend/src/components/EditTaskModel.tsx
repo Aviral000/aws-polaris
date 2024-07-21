@@ -37,7 +37,7 @@ export default function EditTaskModal() {
       setTitle(response.data.title);
       setDescription(response.data.description);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
@@ -49,7 +49,7 @@ export default function EditTaskModal() {
       );
       navigate('/task');
     } catch (error) {
-      console.log('Error updating task:', error);
+      alert(error);
     }
   };
 

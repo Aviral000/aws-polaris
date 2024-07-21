@@ -62,7 +62,6 @@ export default function Header() {
       setError('Failed to fetch user data');
     }
   };
-  console.log(user?.firstName);
 
   useEffect(() => {
     const handleOutsideClicks = (event: MouseEvent) => {
