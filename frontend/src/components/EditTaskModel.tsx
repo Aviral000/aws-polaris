@@ -28,7 +28,7 @@ export default function EditTaskModal() {
 
   const apiCall = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:5051/u1/api/tasks/view/${id}`, {
+      const response = await axios.get(`http://13.232.144.164:5051/u1/api/tasks/view/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

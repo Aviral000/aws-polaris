@@ -26,7 +26,7 @@ export default function UserPage() {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get('13.232.144.164:5051/u1/api/users', {
+      const response = await axios.get('http://13.232.144.164:5051/u1/api/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,7 +46,7 @@ export default function UserPage() {
     e.preventDefault();
     try {
       await axios.put(
-        '13.232.144.164:5051/u1/api/users/update',
+        'http://13.232.144.164:5051/u1/api/users/update',
         user,
         {
           headers: {

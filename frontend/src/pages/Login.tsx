@@ -24,7 +24,7 @@ export default function Login() {
         validate(formData);
     
         try {
-            const response = await axios.post('13.232.144.164:5051/u1/api/users/login', formData);
+            const response = await axios.post('http://13.232.144.164:5051/u1/api/users/login', formData);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('loggedIn', response.data.loggedIn);
             navigate('/task');

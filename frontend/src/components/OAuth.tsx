@@ -17,7 +17,7 @@ const handleGoogleClick = async () => {
         const resultsFromGoogle = await signInWithPopup(auth, provider);
         const { displayName, email } = resultsFromGoogle.user;
 
-        const res = await axios.post("13.232.144.164:5051/u1/api/users/auth/google", {
+        const res = await axios.post("http://13.232.144.164:5051/u1/api/users/auth/google", {
             fullName: displayName,
             email
         });

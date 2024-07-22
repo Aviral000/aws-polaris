@@ -14,7 +14,7 @@ export default function AddTask() {
   const handleAddTask = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('13.232.144.164:5051/u1/api/tasks/add', {
+      await axios.post('http://13.232.144.164:5051/u1/api/tasks/add', {
         title,
         description,
         status
