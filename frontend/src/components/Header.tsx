@@ -52,7 +52,7 @@ export default function Header() {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get('https://polaris-1.onrender.com/u1/api/users', {
+      const response = await axios.get('http://127.0.0.1:5051/u1/api/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

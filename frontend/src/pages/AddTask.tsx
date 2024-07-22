@@ -14,7 +14,7 @@ export default function AddTask() {
   const handleAddTask = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('https://polaris-1.onrender.com/u1/api/tasks/add', {
+      await axios.post('http://127.0.0.1:5051/u1/api/tasks/add', {
         title,
         description,
         status
