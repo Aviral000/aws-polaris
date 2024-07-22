@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import axios from 'axios';
 import '../styles/TaskPage.scss';
 import debounce from 'lodash.debounce';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 interface Task {
   _id: string;
@@ -39,7 +38,7 @@ export default function TaskPage() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5051/u1/api/tasks/view', {
+      const response = await axios.get('https://13.232.144.164:5051/u1/api/tasks/view', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -98,7 +97,7 @@ export default function TaskPage() {
 
   const updateTaskStatus = async (taskId: string, newStatus: 'todo' | 'in-progress' | 'done') => {
     try {
-      await axios.put(`http://127.0.0.1:5051/u1/api/tasks/update/${taskId}`, 
+      await axios.put(`https://13.232.144.164:5051/u1/api/tasks/update/${taskId}`, 
         { status: newStatus },
         {
           headers: {
@@ -133,7 +132,7 @@ export default function TaskPage() {
 
   const handleDelete = async (taskId: string) => {
     try {
-      await axios.delete(`http://127.0.0.1:5051/u1/api/tasks/delete/${taskId}`, {
+      await axios.delete(`https://13.232.144.164:5051/u1/api/tasks/delete/${taskId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
