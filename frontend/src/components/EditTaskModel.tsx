@@ -43,7 +43,7 @@ export default function EditTaskModal() {
 
   const handleSave = async () => {
     try {
-      await axios.put(`https://13.232.144.164:5051/u1/api/tasks/update/${id}`, 
+      await axios.put(`13.232.144.164:5051/u1/api/tasks/update/${id}`, 
         { title, description },
         { headers: { Authorization: `Bearer ${token}` } }
       );

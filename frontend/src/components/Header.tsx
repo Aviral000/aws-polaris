@@ -52,7 +52,7 @@ export default function Header() {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get('https://13.232.144.164:5051/u1/api/users', {
+      const response = await axios.get('13.232.144.164:5051/u1/api/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -108,7 +108,7 @@ export default function Header() {
     <header className='header'>
       <div className={isLargeScreen && !menuOpen ? 'A1' : 'A2'}>
         <div className='B1'>
-          <img src='https://webstockreview.net/images/newspaper-clipart-newspaper-reader-7.png' alt='logo' />
+          <img src='webstockreview.net/images/newspaper-clipart-newspaper-reader-7.png' alt='logo' />
           <div style={{ fontSize: "1.5rem" }}>
             <Link to='/'>Polaris</Link>
             <div style={{ fontSize: ".5rem" }}>THE TASK REMINDER</div>

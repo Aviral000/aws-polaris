@@ -26,7 +26,7 @@ export default function ViewTaskModal() {
 
   const apiCall = async () => {
     try {
-      const response = await axios.get(`https://13.232.144.164:5051/u1/api/tasks/view/${id}`, {
+      const response = await axios.get(`13.232.144.164:5051/u1/api/tasks/view/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

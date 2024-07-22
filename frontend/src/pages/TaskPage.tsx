@@ -38,7 +38,7 @@ export default function TaskPage() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('https://13.232.144.164:5051/u1/api/tasks/view', {
+      const response = await axios.get('13.232.144.164:5051/u1/api/tasks/view', {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -97,7 +97,7 @@ export default function TaskPage() {
 
   const updateTaskStatus = async (taskId: string, newStatus: 'todo' | 'in-progress' | 'done') => {
     try {
-      await axios.put(`https://13.232.144.164:5051/u1/api/tasks/update/${taskId}`, 
+      await axios.put(`13.232.144.164:5051/u1/api/tasks/update/${taskId}`, 
         { status: newStatus },
         {
           headers: {
@@ -132,7 +132,7 @@ export default function TaskPage() {
 
   const handleDelete = async (taskId: string) => {
     try {
-      await axios.delete(`https://13.232.144.164:5051/u1/api/tasks/delete/${taskId}`, {
+      await axios.delete(`13.232.144.164:5051/u1/api/tasks/delete/${taskId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
